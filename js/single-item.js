@@ -1,4 +1,4 @@
-export function createSingleItem(item) {
+export function createSingleItem(item, onToggleCompleted) {
   const div = document.createElement("div");
   div.className = "single-item";
 
@@ -14,6 +14,11 @@ export function createSingleItem(item) {
       <i class="fa-regular fa-trash-can"></i>
     </button>
   `;
+
+  const checkbox = div.querySelector('input[type="checkbox"]');
+  checkbox.addEventListener("change", () => {
+    onToggleCompleted(item.id);
+  });
 
   return div;
 }
