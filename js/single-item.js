@@ -1,3 +1,4 @@
+import { editCompleted, removeItem } from "./app.js";
 export function createSingleItem(item, onToggleCompleted) {
   const div = document.createElement("div");
   div.className = "single-item";
@@ -18,6 +19,11 @@ export function createSingleItem(item, onToggleCompleted) {
   const checkbox = div.querySelector('input[type="checkbox"]');
   checkbox.addEventListener("change", () => {
     onToggleCompleted(item.id);
+  });
+
+  const removeBtn = div.querySelector(".remove-btn");
+  removeBtn.addEventListener("click", () => {
+    removeItem(item.id);
   });
 
   return div;
