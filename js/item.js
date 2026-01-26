@@ -5,7 +5,7 @@ export function createItems(itemsArray) {
   container.className = "items";
 
   itemsArray.forEach((item) => {
-    const itemElement = createSingleItem(item);
+    const itemElement = createSingleItem(item, onToggleCompleted);
     container.appendChild(itemElement);
   });
 
