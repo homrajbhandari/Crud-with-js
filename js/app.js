@@ -1,6 +1,6 @@
 import { groceryItems } from "./data.js";
 import { createItems } from "./item.js";
-
+import { createForm } from "./form.js";
 let items = groceryItems;
 
 export function editCompleted(itemId) {
@@ -18,6 +18,9 @@ function render() {
   app.innerHTML = "";
 
   const itemsElement = createItems(items, editCompleted);
+  const formElement=createForm();
+
+  app.appendChild(formElement);
   app.appendChild(itemsElement);
 }
 
@@ -27,4 +30,20 @@ export function removeItem(itemId) {
   items = items.filter((item) => item.id !== itemId);
   render();
   setTimeout(() => alert("Item Deleted Successfully!"), 0);
+}
+
+function generateId(){
+  return Date.now().toString(36) + Math.random().toString(36).substr(2);
+}
+
+export function addItem(itemName)
+{
+  const newItem = {
+    name: itemName,
+    completed: false,
+    id: generateId(),
+  };
+  items = [...items, newItem];
+  render();
+  setTimeout(() => alert("Item Added Successfully!"), 0);
 }
