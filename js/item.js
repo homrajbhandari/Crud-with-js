@@ -1,6 +1,6 @@
 import { createSingleItem } from "./single-item.js";
 
-export function createItems(itemsArray) {
+export function createItems(itemsArray, onToggleCompleted) {
   const container = document.createElement("div");
   container.className = "items";
 

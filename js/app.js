@@ -1,9 +1,9 @@
 import { groceryItems } from "./data.js";
-import { createItems } from "./items.js";
+import { createItems } from "./item.js";
 
 let items = groceryItems;
 
-function editCompleted(itemId) {
+export function editCompleted(itemId) {
   items = items.map((item) => {
     if (item.id === itemId) {
       return { ...item, completed: !item.completed };
