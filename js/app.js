@@ -2,6 +2,7 @@ import { groceryItems } from "./data.js";
 import { createItems } from "./item.js";
 import { createForm } from "./form.js";
 let items = groceryItems;
+let editId = null;
 
 export function editCompleted(itemId) {
   items = items.map((item) => {
@@ -18,7 +19,10 @@ function render() {
   app.innerHTML = "";
 
   const itemsElement = createItems(items, editCompleted);
-  const formElement=createForm();
+  const formElement = createForm(
+    editId,
+    editId ? items.find((item) => item.id === editId) : null,
+  );
 
   app.appendChild(formElement);
   app.appendChild(itemsElement);
@@ -46,4 +50,27 @@ export function addItem(itemName)
   items = [...items, newItem];
   render();
   setTimeout(() => alert("Item Added Successfully!"), 0);
+}
+
+export function updateItemName(newName) {
+  items = items.map((item) => {
+    if (item.id === editId) {
+      return { ...item, name: newName };
+    }
+    return item;
+  });
+  editId = null;
+  render();
+  setTimeout(() => alert("Item Updated Successfully!"), 0);
+}
+
+export function setEditId(itemId) {
+  editId = itemId;
+  render();
+  setTimeout(() => {
+    const input = document.querySelector(".form-input");
+    if (input) {
+      input.focus();
+    }
+  }, 0);
 }
